@@ -3,16 +3,6 @@
 !
 no aaa root
 !
-username admin privilege 15 role network-admin secret 5 $1$5O85YVVn$HrXcfOivJEnISTMb6xrJc.
-username arista privilege 15 role network-admin secret 5 $1$4VjIjfd1$XkUVulbNDESHFzcxDU.Tk1
-username arista ssh-key ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDeYgMkjKxMU9lL58jOuuWVq8ddMqOq6smMac7topU8A7RtFSbiTUAqWwv1RIMdVBSquNqhXKGOo1xgZrGoigkAWro0YuQr/hZzEjsEdBAhP2KoHJI2j9HMx3gJv2dy/yDheuPRJtumXKZX74CRw09OIB3DQSikOHmj6IRNTZzU/2tS737707EG5oVIjoASoYH4LMPx7HwtEEL94SlzV0Efri+psK/tMyQzIxj/VPs8b+Vl+Y2cQMtvCbiz0u0B97dpKal5oMcjgDY9dQDzzhEGC6DOQQvSKea7mj0VpT0KRDDrUjXnoVfjczcgf0epVeLwAZT/9e2rCoky90/k9qkd arista@niteshtest-1-4c5de935-eos
-!
-daemon TerminAttr
-   exec /usr/bin/TerminAttr -cvcompression=gzip -smashexcludes=ale,flexCounter,hardware,kni,pulse,strata -ingestexclude=/Sysdb/cell/1/agent,/Sysdb/cell/2/agent -cvaddr=192.168.0.5:9910 -cvauth=token,/tmp/token -cvvrf=default -taillogs -disableaaa
-   no shutdown
-!
-transceiver qsfp default-mode 4x10G
-!
 service routing protocols model multi-agent
 !
 hostname s1-spine1
