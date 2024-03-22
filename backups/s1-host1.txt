@@ -1,0 +1,57 @@
+! Command: show running-config
+! device: s1-host1 (cEOSLab, EOS-4.31.1F-34554157.4311F (engineering build))
+!
+no aaa root
+!
+username admin privilege 15 role network-admin secret 5 $1$5O85YVVn$HrXcfOivJEnISTMb6xrJc.
+username arista privilege 15 role network-admin secret 5 $1$4VjIjfd1$XkUVulbNDESHFzcxDU.Tk1
+username arista ssh-key ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDeYgMkjKxMU9lL58jOuuWVq8ddMqOq6smMac7topU8A7RtFSbiTUAqWwv1RIMdVBSquNqhXKGOo1xgZrGoigkAWro0YuQr/hZzEjsEdBAhP2KoHJI2j9HMx3gJv2dy/yDheuPRJtumXKZX74CRw09OIB3DQSikOHmj6IRNTZzU/2tS737707EG5oVIjoASoYH4LMPx7HwtEEL94SlzV0Efri+psK/tMyQzIxj/VPs8b+Vl+Y2cQMtvCbiz0u0B97dpKal5oMcjgDY9dQDzzhEGC6DOQQvSKea7mj0VpT0KRDDrUjXnoVfjczcgf0epVeLwAZT/9e2rCoky90/k9qkd arista@niteshtest-1-4c5de935-eos
+!
+daemon TerminAttr
+   exec /usr/bin/TerminAttr -cvcompression=gzip -smashexcludes=ale,flexCounter,hardware,kni,pulse,strata -ingestexclude=/Sysdb/cell/1/agent,/Sysdb/cell/2/agent -cvaddr=192.168.0.5:9910 -cvauth=token,/tmp/token -cvvrf=default -taillogs -disableaaa
+   no shutdown
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model multi-agent
+!
+hostname s1-host1
+dns domain atd.lab
+!
+spanning-tree mode mstp
+!
+system l1
+   unsupported speed action error
+   unsupported error-correction action error
+!
+management api http-commands
+   no shutdown
+!
+radius-server host 192.168.0.1 key 7 0207165218120E
+!
+aaa group server radius atds
+   server 192.168.0.1
+!
+aaa authentication login default group atds local
+aaa authorization exec default group atds local
+aaa authorization commands all default local
+!
+interface Ethernet1
+   no switchport
+   ip address 172.16.15.5/24
+!
+interface Ethernet2
+!
+interface Management0
+   ip address 192.168.0.16/24
+!
+ip routing
+!
+ip route 10.127.0.0/16 172.16.15.1
+ip route 172.16.0.0/16 172.16.15.1
+!
+ntp server 192.168.0.1 iburst source Management0
+!
+ip radius source-interface Management0
+!
+end
