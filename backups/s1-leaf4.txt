@@ -3,6 +3,12 @@
 !
 no aaa root
 !
+ip access-list standard mcast
+ 10 permit 239.0.0.0/8 log
+!
+exit
+!
+
 transceiver qsfp default-mode 4x10G
 !
 service routing protocols model multi-agent
