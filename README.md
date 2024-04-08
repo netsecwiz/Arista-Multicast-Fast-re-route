@@ -1,7 +1,6 @@
 # Arista-Multicast-Fast-re-route
 going off the guide here:https://www.arista.com/en/support/toi/eos-4-20-1f/13929-multicast-only-fast-reroute
-and adding backups with scripts on leaf1 and leaf 4 we will be testing MoFrr.
-<br /> Please use a version of 4.28. I had issues on other versions. 
+and adding backups with scripts on leaf1 and leaf 4 we will be testing MoFrr. 
 <br />
 Here is 
 the topology: 
